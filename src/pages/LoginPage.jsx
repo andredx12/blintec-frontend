@@ -1,21 +1,29 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import './LoginPage.css';
 
 function LoginPage() {
+  const { login } = useAuth();
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [erro, setErro] = useState('');
   const [carregando, setCarregando] = useState(false);
 
-  function handleSubmit(e) {
+async function handleSubmit(e) {
     e.preventDefault();
     setErro('');
     setCarregando(true);
 
-    // integração com a API vem na próxima etapa
-    setTimeout(() => {
+    try {
+      await login(email, senha);
+      navigate('/');
+    } catch (err) {
+      setErro('E-mail ou senha inválidos');
+    } finally {
       setCarregando(false);
-    }, 500);
+    }
   }
 
   return (
