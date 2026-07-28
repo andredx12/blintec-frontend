@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import LoginPage from './pages/LoginPage';
+import PedidosPage from './pages/PedidosPage';
+import Layout from './components/Layout';
 
 function RotaProtegida({ children }) {
   const { usuario, carregando } = useAuth();
@@ -21,13 +23,14 @@ function AppRoutes() {
     <Routes>
       <Route path="/login" element={<LoginPage />} />
       <Route
-        path="/"
         element={
           <RotaProtegida>
-            <div>Área logada — em construção</div>
+            <Layout />
           </RotaProtegida>
         }
-      />
+      >
+        <Route path="/" element={<PedidosPage />} />
+      </Route>
     </Routes>
   );
 }
