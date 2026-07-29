@@ -1,0 +1,68 @@
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.card-label {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.card-valor {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.dashboard-secao {
+  margin-bottom: 32px;
+}
+
+.dashboard-secao h2 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 12px;
+}
+
+.tag-atrasado {
+  display: inline-block;
+  padding: 3px 8px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-danger);
+  background-color: var(--color-danger-light);
+  border-radius: var(--radius-sm);
+}
+
+.tag-vencimento {
+  display: inline-block;
+  padding: 3px 8px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-warning);
+  background-color: var(--color-warning-light);
+  border-radius: var(--radius-sm);
+}
+
+.tag-ok {
+  display: inline-block;
+  padding: 3px 8px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-success);
+  background-color: var(--color-success-light);
+  border-radius: var(--radius-sm);
+}
