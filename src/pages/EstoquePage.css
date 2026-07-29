@@ -1,0 +1,4 @@
+.tabela td.saldo-baixo {
+  color: var(--color-danger);
+  font-weight: 600;
+}

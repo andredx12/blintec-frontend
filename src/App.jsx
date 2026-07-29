@@ -2,6 +2,8 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import LoginPage from './pages/LoginPage';
 import NovoPedidoPage from './pages/NovoPedidoPage';
+import EstoquePage from './pages/EstoquePage';
+import NovoRoloPage from './pages/NovoRoloPage';
 import PedidosPage from './pages/PedidosPage';
 import Layout from './components/Layout';
 
@@ -32,6 +34,8 @@ function AppRoutes() {
       >
         <Route path="/" element={<PedidosPage />} />
         <Route path="/pedidos/novo" element={<NovoPedidoPage />} />
+        <Route path="/estoque" element={<EstoquePage />} />
+        <Route path="/estoque/novo" element={<NovoRoloPage />} />
       </Route>
     </Routes>
   );
