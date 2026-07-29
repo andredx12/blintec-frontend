@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import Badge from '../components/Badge';
 import './PedidosPage.css';
 
 function PedidosPage() {
+  const navigate = useNavigate();
   const [pedidos, setPedidos] = useState([]);
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState('');
@@ -19,6 +20,10 @@ function PedidosPage() {
       .then((response) => setPedidos(response.data))
       .catch(() => setErro('Não foi possível carregar os pedidos'))
       .finally(() => setCarregando(false));
+  }
+
+  function navegarParaDetalhe(id) {
+    navigate(`/pedidos/${id}`);
   }
 
   return (
@@ -48,7 +53,7 @@ function PedidosPage() {
           </thead>
           <tbody>
             {pedidos.map((pedido) => (
-              <tr key={pedido.id}>
+              <tr key={pedido.id} onClick={() => navegarParaDetalhe(pedido.id)} className="tabela-linha-clicavel">
                 <td>{pedido.numeroPedido}</td>
                 <td>{pedido.cliente?.nome}</td>
                 <td>{pedido.modelo?.nome}</td>

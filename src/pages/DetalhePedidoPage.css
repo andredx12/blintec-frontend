@@ -1,0 +1,62 @@
+.link-voltar {
+  display: block;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  margin-bottom: 4px;
+}
+
+.link-voltar:hover {
+  color: var(--color-primary);
+}
+
+.detalhe-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+  padding: 20px;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.detalhe-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.detalhe-label {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.detalhe-valor {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text);
+}
+.enfesto-resumo {
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: var(--color-text);
+}
+
+.input-selecao-rolo {
+  height: 32px;
+  width: 120px;
+  padding: 0 8px;
+  font-size: 13px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  outline: none;
+}
+
+.input-selecao-rolo:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+.botao-com-margem {
+  margin-top: 12px;
+}
