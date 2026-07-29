@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import api from '../services/api';
 import Badge from '../components/Badge';
 import './PedidosPage.css';
@@ -24,6 +25,7 @@ function PedidosPage() {
     <div className="pedidos-page">
       <div className="page-header">
         <h1>Pedidos</h1>
+        <Link to="/pedidos/novo" className="botao-primario">Novo pedido</Link>
       </div>
 
       {erro && <p className="page-erro">{erro}</p>}
