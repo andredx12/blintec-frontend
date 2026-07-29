@@ -54,7 +54,7 @@ function PedidosPage() {
           <tbody>
             {pedidos.map((pedido) => (
               <tr key={pedido.id} onClick={() => navegarParaDetalhe(pedido.id)} className="tabela-linha-clicavel">
-                <td>{pedido.numeroPedido}</td>
+                <td><span className="tabela-link">{pedido.numeroPedido}</span></td>
                 <td>{pedido.cliente?.nome}</td>
                 <td>{pedido.modelo?.nome}</td>
                 <td>{pedido.cor}</td>

@@ -79,3 +79,16 @@
 .tabela tbody tr:hover {
   background-color: var(--color-bg-subtle);
 }
+
+.tabela-linha-clicavel {
+  cursor: pointer;
+}
+
+.tabela-link {
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+.tabela-linha-clicavel:hover .tabela-link {
+  text-decoration: underline;
+}
