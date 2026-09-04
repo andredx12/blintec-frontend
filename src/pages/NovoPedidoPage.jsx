@@ -6,11 +6,10 @@ import './NovoPedidoPage.css';
 function NovoPedidoPage() {
   const navigate = useNavigate();
 
-  const [clientes, setClientes] = useState([]);
   const [modelos, setModelos] = useState([]);
   const [tamanhos, setTamanhos] = useState([]);
 
-  const [clienteId, setClienteId] = useState('');
+  const [clienteNome, setClienteNome] = useState('');
   const [modeloId, setModeloId] = useState('');
   const [numeroPedido, setNumeroPedido] = useState('');
   const [cor, setCor] = useState('');
@@ -22,7 +21,6 @@ function NovoPedidoPage() {
   const [salvando, setSalvando] = useState(false);
 
   useEffect(() => {
-    api.get('/clientes').then((response) => setClientes(response.data));
     api.get('/modelos').then((response) => setModelos(response.data));
   }, []);
 
@@ -55,15 +53,14 @@ function NovoPedidoPage() {
 
     try {
       await api.post('/pedidos', {
-        cliente: { id: Number(clienteId) },
-        modelo: { id: Number(modeloId) },
+        clienteNome,
         numeroPedido,
+        modeloId: Number(modeloId),
         cor,
         capaExtra,
         dataEntrega,
-        status: 'AGUARDANDO_PROGRAMACAO',
         itens: itens.map((item) => ({
-          tamanhoModelo: { id: Number(item.tamanhoModeloId) },
+          tamanhoModeloId: Number(item.tamanhoModeloId),
           quantidade: Number(item.quantidade),
         })),
       });
@@ -78,59 +75,72 @@ function NovoPedidoPage() {
   return (
     <div className="novo-pedido-page">
       <div className="page-header">
-        <h1>Novo pedido</h1>
+        <div>
+          <h1>Novo pedido</h1>
+          <p className="page-descricao">Preencha os dados abaixo para registrar um novo pedido de produção.</p>
+        </div>
       </div>
 
       {erro && <p className="page-erro">{erro}</p>}
 
       <form onSubmit={handleSubmit} className="pedido-form">
-        <div className="form-grid">
+        <section className="form-secao">
           <div className="form-field">
             <label htmlFor="numeroPedido">Número do pedido</label>
             <input
               id="numeroPedido"
               value={numeroPedido}
               onChange={(e) => setNumeroPedido(e.target.value)}
+              placeholder="Ex: PED-2026-0010"
               required
             />
           </div>
+        </section>
 
-          <div className="form-field">
-            <label htmlFor="cliente">Cliente</label>
-            <select id="cliente" value={clienteId} onChange={(e) => setClienteId(e.target.value)} required>
-              <option value="">Selecione</option>
-              {clientes.map((cliente) => (
-                <option key={cliente.id} value={cliente.id}>{cliente.nome}</option>
-              ))}
-            </select>
+        <section className="form-secao">
+          <h2 className="form-secao-titulo">Informações do pedido</h2>
+
+          <div className="form-grid">
+            <div className="form-field">
+              <label htmlFor="clienteNome">Cliente</label>
+              <input
+                id="clienteNome"
+                value={clienteNome}
+                onChange={(e) => setClienteNome(e.target.value)}
+                placeholder="Digite o nome do cliente"
+                required
+              />
+            </div>
+
+            <div className="form-field">
+              <label htmlFor="modelo">Modelo</label>
+              <select id="modelo" value={modeloId} onChange={(e) => setModeloId(e.target.value)} required>
+                <option value="">Selecione</option>
+                {modelos.map((modelo) => (
+                  <option key={modelo.id} value={modelo.id}>{modelo.nome}</option>
+                ))}
+              </select>
+            </div>
+
+            <div className="form-field">
+              <label htmlFor="cor">Cor</label>
+              <input id="cor" value={cor} onChange={(e) => setCor(e.target.value)} placeholder="Ex: Preto" required />
+            </div>
+
+            <div className="form-field">
+              <label htmlFor="dataEntrega">Data de entrega</label>
+              <input
+                id="dataEntrega"
+                type="date"
+                value={dataEntrega}
+                onChange={(e) => setDataEntrega(e.target.value)}
+                required
+              />
+            </div>
           </div>
+        </section>
 
-          <div className="form-field">
-            <label htmlFor="modelo">Modelo</label>
-            <select id="modelo" value={modeloId} onChange={(e) => setModeloId(e.target.value)} required>
-              <option value="">Selecione</option>
-              {modelos.map((modelo) => (
-                <option key={modelo.id} value={modelo.id}>{modelo.nome}</option>
-              ))}
-            </select>
-          </div>
-
-          <div className="form-field">
-            <label htmlFor="cor">Cor</label>
-            <input id="cor" value={cor} onChange={(e) => setCor(e.target.value)} required />
-          </div>
-
-          <div className="form-field">
-            <label htmlFor="dataEntrega">Data de entrega</label>
-            <input
-              id="dataEntrega"
-              type="date"
-              value={dataEntrega}
-              onChange={(e) => setDataEntrega(e.target.value)}
-              required
-            />
-          </div>
-
+        <section className="form-secao">
           <div className="form-field">
             <label htmlFor="capaExtra">Capas extras por peça</label>
             <input
@@ -141,7 +151,7 @@ function NovoPedidoPage() {
               onChange={(e) => setCapaExtra(Number(e.target.value))}
             />
           </div>
-        </div>
+        </section>
 
         <div className="itens-section">
           <div className="itens-header">
