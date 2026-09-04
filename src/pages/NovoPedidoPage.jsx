@@ -143,13 +143,27 @@ function NovoPedidoPage() {
         <section className="form-secao">
           <div className="form-field">
             <label htmlFor="capaExtra">Capas extras por peça</label>
-            <input
-              id="capaExtra"
-              type="number"
-              min="0"
-              value={capaExtra}
-              onChange={(e) => setCapaExtra(Number(e.target.value))}
-            />
+            <div className="stepper">
+              <button
+                type="button"
+                onClick={() => setCapaExtra(Math.max(0, capaExtra - 1))}
+                disabled={capaExtra === 0}
+                aria-label="Diminuir capas extras"
+              >
+                −
+              </button>
+              <span id="capaExtra" aria-live="polite">{capaExtra}</span>
+              <button
+                type="button"
+                onClick={() => setCapaExtra(capaExtra + 1)}
+                aria-label="Aumentar capas extras"
+              >
+                +
+              </button>
+            </div>
+            <p className="campo-ajuda">
+              Cada capa extra multiplica a quantidade de capas cortadas por peça. Deixe em 0 se o pedido não tiver capa extra.
+            </p>
           </div>
         </section>
 
